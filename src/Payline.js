@@ -248,6 +248,43 @@ export default class Payline {
             }, parseErrors);
     }
 
+    doWebAuthorization(amount, ref, date, returnURL, cancelURL, currency = CURRENCIES.EUR) {
+        var body = {
+            payment: {
+                attributes: ns('payment'),
+                amount,
+                currency,
+                action: ACTIONS.AUTHORIZATION,
+                mode: 'CPT',
+                contractNumber: this.contractNumber
+            },
+            returnURL,
+            cancelURL,
+            order: {
+                attributes: ns('order'),
+                ref,
+                amount,
+                currency,
+                // Format : 20/06/2015 20:21
+                date
+            },
+            selectedContractList: null,
+            buyer: {}
+        };
+
+        return this.initialize()
+            .then(client => Promise.fromNode(callback => {
+                client.doWebAuthorization(body, callback);
+            }))
+            .spread(response => {
+                if (isSuccessful(response.result)) {
+                    return response;
+                }
+
+                throw response.result;
+            }, parseErrors);
+    }
+
     doWebPayment(amount, ref, date, returnURL, cancelURL, currency = CURRENCIES.EUR) {
         var body = {
             payment: {

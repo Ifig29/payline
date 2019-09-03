@@ -1,6 +1,6 @@
 {
-  "name": "payline",
-  "version": "1.0.2",
+  "name": "payline-ifig29",
+  "version": "1.0.3",
   "description": "NodeJS SDK for payline.com API",
   "main": "dist/index.js",
   "scripts": {
@@ -10,10 +10,10 @@
     "build": "babel src/ -d dist/ && cp src/*.wsdl dist/",
     "prepublish": "yarn lint && yarn build"
   },
-  "homepage": "https://github.com/cubyn/payline",
+  "homepage": "https://github.com/ifig29/payline",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cubyn/payline.git"
+    "url": "git://github.com/ifig29/payline.git"
   },
   "engine": {
     "node": ">=4"
